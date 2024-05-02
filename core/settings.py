@@ -41,7 +41,10 @@ DEFAULT_INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "phonenumber_field",
+    
+]
 
 MY_CREATED_APPS = [
     "users",
@@ -166,3 +169,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = 'users.User'
+
+# PHONENUMBER_DB_FORMAT="E164" # "E164", "INTERNATIONAL", "RFC3966", "NATIONAL"
+PHONENUMBER_DEFAULT_FORMAT = "INTERNATIONAL"
+PHONENUMBER_DEFAULT_REGION = "BD"
