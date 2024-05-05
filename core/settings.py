@@ -33,8 +33,11 @@ ALLOWED_HOSTS = ['*']
 
 
 DEFAULT_INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
+    # "django.contrib.sites",
+    # "django.contrib.humanize",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -69,7 +72,8 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        # "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -82,7 +86,12 @@ TEMPLATES = [
     }
 ]
 
+# # Daphne
+# ASGI_APPLICATION = "core.asgi.application"
+
+
 WSGI_APPLICATION = "core.wsgi.application"
+
 
 
 # Database
@@ -111,7 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Dhaka"
 
 USE_I18N = True
 
@@ -174,3 +184,24 @@ AUTH_USER_MODEL = 'users.User'
 # PHONENUMBER_DB_FORMAT="E164" # "E164", "INTERNATIONAL", "RFC3966", "NATIONAL"
 # PHONENUMBER_DEFAULT_FORMAT = "INTERNATIONAL"
 PHONENUMBER_DEFAULT_REGION = "BD"
+
+
+# docker run -d --rm -p 6379:6379 redis:7
+# pip install channels_redis
+# Channels
+ASGI_APPLICATION = "core.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#     }
+# }
